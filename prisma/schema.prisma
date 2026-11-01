@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String?  @unique
+  phone        String?  @unique
+  name         String
+  kingdomName  String
+  avatarSeed   String   @default("sage")
+  country      String?
+  grade        Int?
+  board        String?
+  subjects     String   @default("[]")
+  coins        Int      @default(0)
+  lat          Float?
+  lng          Float?
+  locationName String?
+  onboarded    Boolean  @default(false)
+  isDemo       Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sessions    Session[]
+  notes       Note[]
+  tests       TestAttempt[]
+  progress    ChapterProgress[]
+  coinLedger  CoinTransaction[]
+
+  @@index([lat, lng])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([userId])
+}
+
+model OtpCode {
+  id        String   @id @default(cuid())
+  phone     String
+  code      String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([phone])
+}
+
+// Cache for Gemini-generated syllabus structure keyed by country|board|grade|subject
+model SyllabusCache {
+  id        String   @id @default(cuid())
+  cacheKey  String   @unique
+  data      String
+  createdAt DateTime @default(now())
+}
+
+// Cache for Gemini-generated chapter learning modules keyed by country|board|grade|subject|chapter
+model ChapterContent {
+  id        String   @id @default(cuid())
+  cacheKey  String   @unique
+  data      String
+  createdAt DateTime @default(now())
+}
+
+model ChapterProgress {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject       String
+  chapterTitle  String
+  status        String    @default("in_progress")
+  coinsEarned   Int       @default(0)
+  completedAt   DateTime?
+  createdAt     DateTime  @default(now())
+
+  @@unique([userId, subject, chapterTitle])
+}
+
+model Note {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject     String
+  chapter     String
+  title       String
+  content     String   @default("")
+  blocks      String?
+  coinsEarned Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model TestAttempt {
+  id           String    @id @default(cuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject      String
+  chapter      String
+  paperJson    String
+  answersJson  String?
+  resultJson   String?
+  status       String    @default("draft")
+  coinsEarned  Int       @default(0)
+  createdAt    DateTime  @default(now())
+  submittedAt  DateTime?
+
+  @@index([userId])
+}
+
+model CoinTransaction {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount    Int
+  reason    String
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}

@@ -1,0 +1,586 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-nunito);
+  --font-display: var(--font-baloo);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-gold: var(--gold);
+  --color-lavender: var(--lavender);
+  --color-royal: var(--royal);
+  --radius-sm: calc(var(--radius) - 14px);
+  --radius-md: calc(var(--radius) - 8px);
+  --radius-lg: calc(var(--radius) - 4px);
+  --radius-xl: var(--radius);
+}
+
+/*
+ * SCHOLAR'S KINGDOM — Premium Claymorphism System
+ * A hand-molded clay world on a warm craft table.
+ * One light source (top). Every surface is molded, pressed, or raised.
+ */
+:root {
+  --radius: 2rem;
+
+  /* The craft table & ink */
+  --background: #ece1cd;
+  --foreground: #4a3555;
+
+  /* Warm white clay surfaces */
+  --card: #fdf8ee;
+  --card-foreground: #4a3555;
+  --popover: #fffaf0;
+  --popover-foreground: #4a3555;
+
+  /* Clay purple — the royal brand */
+  --primary: #8e4fd0;
+  --primary-foreground: #fff9f0;
+  --lavender: #8e4fd0;
+  --royal: #6d3bb8;
+
+  /* Honey gold */
+  --gold: #e9a63b;
+
+  --secondary: #f3e9d6;
+  --secondary-foreground: #6b5273;
+  --muted: #e6dbc4;
+  --muted-foreground: #8a7290;
+  --accent: #f6eedd;
+  --accent-foreground: #4a3555;
+  --destructive: #d9534f;
+  --border: rgba(74, 53, 85, 0.13);
+  --input: #f8f1e2;
+  --ring: #8e4fd0;
+
+  --chart-1: #8e4fd0;
+  --chart-2: #e9a63b;
+  --chart-3: #2ea8a2;
+  --chart-4: #63ad5c;
+  --chart-5: #e4798a;
+
+  --sidebar: #fdf8ee;
+  --sidebar-foreground: #4a3555;
+  --sidebar-primary: #8e4fd0;
+  --sidebar-primary-foreground: #fff9f0;
+  --sidebar-accent: #f3e9d6;
+  --sidebar-accent-foreground: #6b5273;
+  --sidebar-border: rgba(74, 53, 85, 0.13);
+  --sidebar-ring: #8e4fd0;
+
+  /* ── The clay recipes (one light source, top) ─────────────────────── */
+  --clay-ink: 74, 53, 85;
+
+  --clay-raise:
+    inset 0 2px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -7px 12px -6px rgba(var(--clay-ink), 0.18),
+    0 18px 34px -14px rgba(var(--clay-ink), 0.34),
+    0 5px 12px -5px rgba(var(--clay-ink), 0.18);
+
+  --clay-raise-sm:
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -4px 8px -5px rgba(var(--clay-ink), 0.15),
+    0 8px 18px -9px rgba(var(--clay-ink), 0.3),
+    0 2px 6px -3px rgba(var(--clay-ink), 0.16);
+
+  --clay-press:
+    inset 0 5px 11px rgba(var(--clay-ink), 0.16),
+    inset 0 -2px 2px rgba(255, 255, 255, 0.85),
+    0 1px 0 rgba(255, 255, 255, 0.7);
+
+  --clay-btn:
+    inset 0 2px 2px rgba(255, 255, 255, 0.42),
+    inset 0 -6px 10px -5px rgba(47, 22, 68, 0.45),
+    0 10px 22px -8px rgba(110, 59, 176, 0.55),
+    0 3px 8px -3px rgba(110, 59, 176, 0.35);
+
+  --clay-gold:
+    inset 0 2px 2px rgba(255, 255, 255, 0.55),
+    inset 0 -6px 10px -5px rgba(140, 84, 12, 0.4),
+    0 10px 22px -8px rgba(205, 138, 40, 0.55),
+    0 3px 8px -3px rgba(205, 138, 40, 0.35);
+
+  /* springy press-and-release curve */
+  --squish-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overscroll-behavior-y: none;
+    font-feature-settings: "tnum";
+  }
+
+  /* The clay grain — real material, human touch */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    pointer-events: none;
+    opacity: 0.11;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: rgba(233, 166, 59, 0.45);
+    color: #4a3555;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(142, 79, 208, 0.32);
+    border-radius: 999px;
+    border: 3px solid rgba(236, 225, 205, 0.9);
+  }
+}
+
+@layer utilities {
+  /* ── The craft-table backdrop ─────────────────────────────────────── */
+  .kingdom-bg {
+    background:
+      radial-gradient(ellipse 90% 55% at 50% -10%, rgba(255, 253, 246, 0.95), transparent 62%),
+      radial-gradient(ellipse 55% 40% at 90% 10%, rgba(233, 166, 59, 0.1), transparent 55%),
+      radial-gradient(ellipse 60% 42% at 4% 32%, rgba(142, 79, 208, 0.08), transparent 58%),
+      radial-gradient(130% 100% at 50% 42%, transparent 58%, rgba(74, 53, 85, 0.09) 100%),
+      #ece1cd;
+  }
+
+  /* ── Molded clay card (legacy alias: glass-card) ──────────────────── */
+  .clay,
+  .glass-card {
+    background: linear-gradient(180deg, #fffdf6 0%, #fbf4e3 100%);
+    border-radius: 1.75rem;
+    box-shadow: var(--clay-raise);
+  }
+
+  .clay-inset {
+    background: #f0e7d3;
+    border-radius: 1.25rem;
+    box-shadow: var(--clay-press);
+  }
+
+  /* Slight molded lift on hover — clay responds to touch */
+  .clay-hover,
+  .glass-card-hover {
+    transition: transform 0.28s var(--squish-ease), box-shadow 0.28s ease;
+  }
+  .clay-hover:hover,
+  .glass-card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      inset 0 2px 2px rgba(255, 255, 255, 0.95),
+      inset 0 -7px 12px -6px rgba(var(--clay-ink), 0.18),
+      0 24px 40px -16px rgba(var(--clay-ink), 0.38),
+      0 7px 14px -5px rgba(var(--clay-ink), 0.2);
+  }
+  .clay-hover:active,
+  .glass-card-hover:active {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  /* ── The primary clay button — squeezable royal purple ────────────── */
+  .glow-btn,
+  .clay-btn {
+    background: #8e4fd0;
+    color: #fff9f0;
+    box-shadow: var(--clay-btn);
+    transition:
+      transform 0.18s var(--squish-ease),
+      box-shadow 0.22s ease,
+      filter 0.2s ease;
+  }
+  .glow-btn:hover,
+  .clay-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow:
+      inset 0 3px 3px rgba(255, 255, 255, 0.5),
+      inset 0 -6px 10px -5px rgba(47, 22, 68, 0.45),
+      0 14px 26px -9px rgba(110, 59, 176, 0.6),
+      0 4px 9px -3px rgba(110, 59, 176, 0.38);
+  }
+  .glow-btn:active,
+  .clay-btn:active {
+    transform: translateY(3px) scale(0.97);
+    box-shadow:
+      inset 0 3px 8px rgba(47, 22, 68, 0.5),
+      inset 0 -1px 1px rgba(255, 255, 255, 0.3),
+      0 4px 10px -6px rgba(110, 59, 176, 0.4);
+  }
+  .glow-btn:disabled,
+  .clay-btn:disabled {
+    filter: saturate(0.35) brightness(1.06);
+    box-shadow: var(--clay-raise-sm);
+    transform: none;
+  }
+
+  /* Gold clay button — coins, rewards */
+  .clay-gold-btn {
+    background: #eda93f;
+    color: #5c3708;
+    box-shadow: var(--clay-gold);
+    transition:
+      transform 0.18s var(--squish-ease),
+      box-shadow 0.22s ease,
+      filter 0.2s ease;
+  }
+  .clay-gold-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.04);
+  }
+  .clay-gold-btn:active {
+    transform: translateY(3px) scale(0.97);
+    box-shadow:
+      inset 0 3px 8px rgba(140, 84, 12, 0.45),
+      0 4px 10px -6px rgba(205, 138, 40, 0.4);
+  }
+
+  /* Soft neutral clay button (legacy alias: ghost-btn) */
+  .ghost-btn,
+  .clay-btn-soft {
+    background: linear-gradient(180deg, #fdf8ec 0%, #f5ecd9 100%);
+    color: #6b5273;
+    box-shadow: var(--clay-raise-sm);
+    transition:
+      transform 0.18s var(--squish-ease),
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+  }
+  .ghost-btn:hover,
+  .clay-btn-soft:hover {
+    filter: brightness(1.02);
+    transform: translateY(-1px);
+  }
+  .ghost-btn:active,
+  .clay-btn-soft:active {
+    transform: translateY(2px) scale(0.97);
+    box-shadow: var(--clay-press);
+  }
+
+  /* Molded chip / tag */
+  .clay-chip {
+    background: linear-gradient(180deg, #fdf8ec, #f4ebd7);
+    color: #6b5273;
+    box-shadow: var(--clay-raise-sm);
+    border-radius: 999px;
+    transition: transform 0.18s var(--squish-ease), box-shadow 0.2s ease;
+  }
+  .clay-chip:active {
+    transform: translateY(2px) scale(0.96);
+    box-shadow: var(--clay-press);
+  }
+
+  /* Extruded clay puck — round buttons with a molded side wall */
+  .clay-puck {
+    background: #8e4fd0;
+    color: #fff9f0;
+    box-shadow:
+      inset 0 2px 2px rgba(255, 255, 255, 0.5),
+      inset 0 -5px 8px -4px rgba(47, 22, 68, 0.5),
+      0 5px 0 rgba(110, 59, 176, 0.32),
+      0 14px 24px -8px rgba(110, 59, 176, 0.5);
+    transition: transform 0.18s var(--squish-ease), box-shadow 0.16s ease;
+  }
+  .clay-puck:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 2px 2px rgba(255, 255, 255, 0.5),
+      inset 0 -5px 8px -4px rgba(47, 22, 68, 0.5),
+      0 6px 0 rgba(110, 59, 176, 0.32),
+      0 16px 26px -8px rgba(110, 59, 176, 0.55);
+  }
+  .clay-puck:active {
+    transform: translateY(4px) scale(0.95);
+    box-shadow:
+      inset 0 3px 8px rgba(47, 22, 68, 0.5),
+      0 1px 0 rgba(110, 59, 176, 0.3),
+      0 4px 10px -6px rgba(110, 59, 176, 0.4);
+  }
+  .clay-puck-soft {
+    background: linear-gradient(180deg, #fffdf6, #f5ecd9);
+    color: #6d3bb8;
+    box-shadow:
+      inset 0 2px 2px rgba(255, 255, 255, 0.95),
+      inset 0 -4px 7px -4px rgba(74, 53, 85, 0.18),
+      0 5px 0 rgba(198, 182, 152, 0.5),
+      0 12px 20px -8px rgba(74, 53, 85, 0.32);
+    transition: transform 0.18s var(--squish-ease), box-shadow 0.16s ease;
+  }
+  .clay-puck-soft:hover {
+    transform: translateY(-2px);
+  }
+  .clay-puck-soft:active {
+    transform: translateY(4px) scale(0.95);
+    box-shadow:
+      inset 0 3px 8px rgba(74, 53, 85, 0.35),
+      0 1px 0 rgba(198, 182, 152, 0.5);
+  }
+
+  /* Icon pressed into a clay well */
+  .clay-well {
+    background: #f0e7d3;
+    box-shadow: var(--clay-press);
+    border-radius: 1rem;
+  }
+
+  .font-display {
+    font-family: var(--font-baloo), var(--font-nunito), sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Solid clay inks — no gradient text, molded color instead */
+  .gold-text {
+    color: #a86a12;
+  }
+  .lavender-text {
+    color: #7a3fbf;
+  }
+  .text-glow {
+    /* legacy no-op — clay never glows */
+  }
+
+  /* ── Motion: molded pieces float like held breath ─────────────────── */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  .animate-float-slow {
+    animation: float 9s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: clay-pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes clay-pulse {
+    0%,
+    100% {
+      box-shadow: var(--clay-raise-sm);
+    }
+    50% {
+      box-shadow:
+        inset 0 2px 2px rgba(255, 255, 255, 0.95),
+        inset 0 -7px 12px -6px rgba(var(--clay-ink), 0.18),
+        0 18px 34px -12px rgba(var(--clay-ink), 0.4),
+        0 5px 12px -4px rgba(var(--clay-ink), 0.2);
+    }
+  }
+
+  /* Shimmer for loading states — light sweeping across clay */
+  .shimmer {
+    background: linear-gradient(
+      100deg,
+      rgba(74, 53, 85, 0.045) 30%,
+      rgba(142, 79, 208, 0.13) 50%,
+      rgba(74, 53, 85, 0.045) 70%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s infinite linear;
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Twinkling clay dust */
+  .sparkle {
+    animation: sparkle 3.2s ease-in-out infinite;
+  }
+  @keyframes sparkle {
+    0%,
+    100% {
+      opacity: 0.2;
+      transform: scale(0.7) rotate(0deg);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.12) rotate(18deg);
+    }
+  }
+
+  /* Custom scrollbar for inner lists */
+  .kingdom-scroll::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  .kingdom-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .kingdom-scroll::-webkit-scrollbar-thumb {
+    background: rgba(122, 63, 191, 0.3);
+    border-radius: 999px;
+  }
+  .kingdom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(122, 63, 191, 0.3) transparent;
+  }
+
+  /* ── Leaflet, molded from clay ─────────────────────────────────── */
+  .leaflet-container {
+    background: #e7dcc3 !important;
+    font-family: var(--font-nunito), sans-serif;
+  }
+  /* Warm the vector tiles so they belong to the clay table */
+  .leaflet-tile-pane {
+    filter: saturate(0.82) sepia(0.17) brightness(1.03);
+  }
+  .leaflet-control-attribution {
+    background: rgba(250, 244, 230, 0.9) !important;
+    color: #8a7290 !important;
+    font-size: 9px !important;
+    border-radius: 8px 0 0 0;
+    padding: 2px 8px !important;
+  }
+  .leaflet-control-attribution a {
+    color: #7a3fbf !important;
+  }
+  .leaflet-popup-content-wrapper {
+    background: #fffaf0 !important;
+    color: #4a3555 !important;
+    border-radius: 18px !important;
+    box-shadow: var(--clay-raise) !important;
+  }
+  .leaflet-popup-tip {
+    background: #fffaf0 !important;
+    box-shadow: 0 6px 14px -6px rgba(74, 53, 85, 0.35);
+  }
+  .leaflet-popup-close-button {
+    color: #8a7290 !important;
+  }
+  .leaflet-bar {
+    box-shadow: var(--clay-raise-sm) !important;
+    border-radius: 14px !important;
+    overflow: hidden;
+  }
+  .leaflet-bar a {
+    background: #fffaf0 !important;
+    color: #6d3bb8 !important;
+    border-bottom: none !important;
+    width: 34px !important;
+    height: 34px !important;
+    line-height: 34px !important;
+    font-weight: 700;
+  }
+  .leaflet-bar a:hover {
+    background: #f6eedd !important;
+  }
+}
+
+/* Hide number input spinners */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ── Sonner toasts, molded from clay ────────────────────────────── */
+[data-sonner-toast] {
+  background: linear-gradient(180deg, #fffdf6, #fbf4e3) !important;
+  color: #4a3555 !important;
+  border: none !important;
+  border-radius: 1.25rem !important;
+  box-shadow: var(--clay-raise) !important;
+  font-family: var(--font-nunito), sans-serif !important;
+  padding: 14px 18px !important;
+}
+[data-sonner-toast] [data-title] {
+  color: #4a3555 !important;
+  font-weight: 800 !important;
+}
+[data-sonner-toast] [data-description] {
+  color: #6b5273 !important;
+  font-weight: 600 !important;
+}
+[data-sonner-toast] [data-button] {
+  background: #8e4fd0 !important;
+  color: #fff9f0 !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+[data-sonner-toast] [data-close-button] {
+  color: #8a7290 !important;
+  background: transparent !important;
+}
+[data-sonner-toast][data-type="success"] [data-icon] {
+  color: #4f8a4a !important;
+}
+[data-sonner-toast][data-type="error"] [data-icon] {
+  color: #d9534f !important;
+}
+[data-sonner-toast][data-type="info"] [data-icon] {
+  color: #8e4fd0 !important;
+}
+[data-sonner-toast][data-type="warning"] [data-icon] {
+  color: #a86a12 !important;
+}
+[data-sonner-toast] .sonner-loading-bar {
+  background: #8e4fd0 !important;
+}
+
+/* Soft-motion users get still clay */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-slow,
+  .animate-pulse-glow,
+  .sparkle,
+  .shimmer {
+    animation: none !important;
+  }
+}
